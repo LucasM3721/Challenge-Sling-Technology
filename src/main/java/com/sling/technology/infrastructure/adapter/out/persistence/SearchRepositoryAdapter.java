@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Adapter that implements the domain SearchRepository using Spring Data JPA.
+ * Ages are stored as comma-separated string to preserve order for count comparison.
+ */
 @Component
 public class SearchRepositoryAdapter implements SearchRepository {
 

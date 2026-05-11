@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_TOPIC;
 
+/**
+ * Kafka producer that publishes hotel searches to the message broker.
+ */
 @Component
 public class KafkaSearchProducer implements SearchMessagePublisher {
 

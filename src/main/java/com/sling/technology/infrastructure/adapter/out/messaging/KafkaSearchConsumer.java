@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_GROUP;
 import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_TOPIC;
 
+/**
+ * Kafka consumer that persists hotel searches to the database.
+ * Virtual threads are enabled via application.properties for better scalability.
+ */
 @Component
 public class KafkaSearchConsumer {
 

@@ -69,25 +69,25 @@ public class SearchControllerTest {
         );
         SearchCount searchCount = new SearchCount("searchId", hotelSearch, 5L);
 
-        when(countUseCase.execute("hotelId")).thenReturn(searchCount);
+        when(countUseCase.execute("searchId")).thenReturn(searchCount);
 
         mockMvc.perform(get("/count")
                         .contentType(String.valueOf(MediaType.APPLICATION_JSON))
-                        .param("hotelId", "hotelId"))
+                        .param("searchId", "searchId"))
                 .andExpect(status().isOk());
 
-        verify(countUseCase, times(1)).execute("hotelId");
+        verify(countUseCase, times(1)).execute("searchId");
     }
 
     @Test
     void shouldTryToCountAndReturnBadRequestHttp() throws Exception {
-        when(countUseCase.execute("hotelId")).thenThrow(new DomainException(DOMAIN_EXCEPTION_COUNT_SERVICE_SEARCH_ID));
+        when(countUseCase.execute("searchId")).thenThrow(new DomainException(DOMAIN_EXCEPTION_COUNT_SERVICE_SEARCH_ID));
 
         mockMvc.perform(get("/count")
                         .contentType(String.valueOf(MediaType.APPLICATION_JSON))
-                        .param("hotelId", "hotelId"))
+                        .param("searchId", "searchId"))
                 .andExpect(status().isBadRequest());
 
-        verify(countUseCase, times(1)).execute("hotelId");
+        verify(countUseCase, times(1)).execute("searchId");
     }
 }

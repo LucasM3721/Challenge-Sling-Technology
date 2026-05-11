@@ -11,6 +11,10 @@ import java.util.Objects;
 import static com.sling.technology.utils.Constants.*;
 import static java.util.UUID.randomUUID;
 
+/**
+ * Represents a hotel availability search request.
+ * Immutable record with validation in compact constructor.
+ */
 public record HotelSearch(
         String hotelId,
         LocalDate checkIn,
@@ -43,7 +47,7 @@ public record HotelSearch(
                                 throw new DomainException(DOMAIN_EXCEPTION_HOTEL_SEARCH_AGE_VALUE);
                         }
                 }
-
+                // Defensive copy to ensure immutability
                 ages = List.copyOf(ages);
         }
 }

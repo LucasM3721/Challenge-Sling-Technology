@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import static com.sling.technology.utils.Constants.DOMAIN_EXCEPTION_COUNT_SERVICE_SEARCH_ID;
 
+/**
+ * Use case implementation for counting identical hotel searches.
+ */
 @Service
 public class SearchCountService implements CountUseCase {
 
