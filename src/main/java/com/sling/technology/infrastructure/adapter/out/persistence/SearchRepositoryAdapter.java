@@ -1,4 +1,4 @@
-package com.sling.technology.infraestructure.adapter.out.persistance;
+package com.sling.technology.infrastructure.adapter.out.persistence;
 
 import com.sling.technology.domain.model.HotelSearch;
 import com.sling.technology.domain.repository.SearchRepository;

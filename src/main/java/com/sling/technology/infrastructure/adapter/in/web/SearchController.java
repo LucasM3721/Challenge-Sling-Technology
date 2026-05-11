@@ -1,8 +1,7 @@
-package com.sling.technology.infraestructure.adapter.in.web;
+package com.sling.technology.infrastructure.adapter.in.web;
 
 import com.sling.technology.application.port.in.CountUseCase;
 import com.sling.technology.application.port.in.SearchUseCase;
-import com.sling.technology.application.service.HotelSearchService;
 import com.sling.technology.domain.model.HotelSearch;
 import com.sling.technology.domain.model.SearchCount;
 import jakarta.validation.Valid;

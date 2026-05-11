@@ -1,4 +1,4 @@
-package com.sling.technology.infraestructure.adapter.in.web;
+package com.sling.technology.infrastructure.adapter.in.web;
 
 import com.sling.technology.domain.exception.DomainException;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.sling.technology.utils.Constants.INVALID_PAYLOAD_FORMAT;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -38,6 +40,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Invalid payload format. Make sure dates are in dd/MM/yyyy format and fields are correct."));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", INVALID_PAYLOAD_FORMAT));
     }
 }

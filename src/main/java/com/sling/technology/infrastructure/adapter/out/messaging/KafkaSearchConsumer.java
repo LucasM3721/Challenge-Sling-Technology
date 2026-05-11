@@ -1,4 +1,4 @@
-package com.sling.technology.infraestructure.adapter.out.messaging;
+package com.sling.technology.infrastructure.adapter.out.messaging;
 
 import com.sling.technology.domain.model.HotelSearch;
 import com.sling.technology.domain.repository.SearchRepository;

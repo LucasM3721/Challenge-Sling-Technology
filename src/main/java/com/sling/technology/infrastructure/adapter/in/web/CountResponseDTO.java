@@ -1,4 +1,4 @@
-package com.sling.technology.infraestructure.adapter.in.web;
+package com.sling.technology.infrastructure.adapter.in.web;
 
 public record CountResponseDTO(
         String searchId,
