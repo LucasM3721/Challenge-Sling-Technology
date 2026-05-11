@@ -5,6 +5,7 @@ import com.sling.technology.domain.repository.SearchRepository;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_GROUP;
 import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_TOPIC;
 
 @Component
@@ -16,8 +17,8 @@ public class KafkaSearchConsumer {
         this.searchRepository = searchRepository;
     }
 
-    @KafkaListener(topics = HOTEL_SEARCH_KAFKA_TOPIC)
-    public void consume(HotelSearch hotelSearch){
+    @KafkaListener(topics = HOTEL_SEARCH_KAFKA_TOPIC, groupId = HOTEL_SEARCH_KAFKA_GROUP)
+    public void consume(HotelSearch hotelSearch) {
         searchRepository.save(hotelSearch);
     }
 }

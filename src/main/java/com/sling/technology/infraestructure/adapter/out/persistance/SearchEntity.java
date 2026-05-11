@@ -34,5 +34,5 @@ public class SearchEntity {
     private LocalDate checkOut;
 
     @Column(nullable = false)
-    private List<Integer> ages;
+    private String ages;
 }

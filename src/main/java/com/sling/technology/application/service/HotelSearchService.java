@@ -1,17 +1,19 @@
 package com.sling.technology.application.service;
 
+import com.sling.technology.application.port.in.SearchUseCase;
 import com.sling.technology.domain.model.HotelSearch;
 import com.sling.technology.domain.repository.SearchMessagePublisher;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HotelSearchService {
+public class HotelSearchService implements SearchUseCase {
     private final SearchMessagePublisher searchMessagePublisher;
 
     public HotelSearchService(SearchMessagePublisher searchMessagePublisher) {
         this.searchMessagePublisher = searchMessagePublisher;
     }
 
+    @Override
     public String execute(HotelSearch hotelSearch){
         searchMessagePublisher.publish(hotelSearch);
 
