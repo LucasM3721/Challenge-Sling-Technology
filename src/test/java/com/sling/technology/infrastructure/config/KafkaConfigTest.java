@@ -6,29 +6,32 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 
-import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_TOPIC;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class KafkaConfigTest {
+class KafkaConfigTest {
+
+    private static final String TEST_TOPIC_NAME = "hotel_availability_searches";
 
     private KafkaConfig kafkaConfig;
 
     @BeforeEach
     void setUp() throws Exception {
         kafkaConfig = new KafkaConfig();
-        
+
         Field topicNameField = KafkaConfig.class.getDeclaredField("topicName");
         topicNameField.setAccessible(true);
-        topicNameField.set(kafkaConfig, HOTEL_SEARCH_KAFKA_TOPIC);
+        topicNameField.set(kafkaConfig, TEST_TOPIC_NAME);
     }
 
     @Test
     void shouldCreateSearchTopicWithCorrectConfiguration() {
         NewTopic topic = kafkaConfig.searchTopic();
 
-        assertNotNull(topic);
-        assertEquals(HOTEL_SEARCH_KAFKA_TOPIC, topic.name());
-        assertEquals(1, topic.numPartitions());
-        assertEquals(1, topic.replicationFactor());
+        assertAll(
+                () -> assertNotNull(topic),
+                () -> assertEquals(TEST_TOPIC_NAME, topic.name()),
+                () -> assertEquals(1, topic.numPartitions()),
+                () -> assertEquals(1, topic.replicationFactor())
+        );
     }
 }

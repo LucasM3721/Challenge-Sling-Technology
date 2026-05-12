@@ -11,7 +11,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-import static com.sling.technology.utils.Constants.HOTEL_SEARCH_TABLE_NAME;
+import static com.sling.technology.infrastructure.utils.Constants.HOTEL_SEARCH_TABLE_NAME;
 
 @Entity
 @Table(name = HOTEL_SEARCH_TABLE_NAME)

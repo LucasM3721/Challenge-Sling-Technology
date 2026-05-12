@@ -1,6 +1,7 @@
 package com.sling.technology.infrastructure.adapter.in.web;
 
 import com.sling.technology.domain.exception.DomainException;
+import com.sling.technology.domain.exception.SearchNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -13,13 +14,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.util.List;
 import java.util.Map;
 
-import static com.sling.technology.utils.Constants.*;
+import static com.sling.technology.domain.exception.DomainMessages.*;
+import static com.sling.technology.infrastructure.utils.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GlobalExceptionHandlerTest {
+class GlobalExceptionHandlerTest {
 
     private GlobalExceptionHandler globalExceptionHandler;
 
@@ -47,14 +48,27 @@ public class GlobalExceptionHandlerTest {
 
     @Test
     void shouldReturnBadRequestForDomainException() {
-        DomainException exception = new DomainException(DOMAIN_EXCEPTION_HOTEL_SEARCH_CHECK_IN_BEFORE_CHECK_OUT);
+        DomainException exception = new DomainException(CHECK_IN_BEFORE_CHECK_OUT);
 
         ResponseEntity<Map<String, String>> response = globalExceptionHandler.handleDomainException(exception);
 
         assertAll(
                 () -> assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode()),
                 () -> assertNotNull(response.getBody()),
-                () -> assertEquals(DOMAIN_EXCEPTION_HOTEL_SEARCH_CHECK_IN_BEFORE_CHECK_OUT, response.getBody().get("error"))
+                () -> assertEquals(CHECK_IN_BEFORE_CHECK_OUT, response.getBody().get(ERROR_KEY))
+        );
+    }
+
+    @Test
+    void shouldReturnNotFoundForSearchNotFoundException() {
+        SearchNotFoundException exception = new SearchNotFoundException(SEARCH_NOT_FOUND);
+
+        ResponseEntity<Map<String, String>> response = globalExceptionHandler.handleSearchNotFoundException(exception);
+
+        assertAll(
+                () -> assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode()),
+                () -> assertNotNull(response.getBody()),
+                () -> assertEquals(SEARCH_NOT_FOUND, response.getBody().get(ERROR_KEY))
         );
     }
 
@@ -67,8 +81,7 @@ public class GlobalExceptionHandlerTest {
         assertAll(
                 () -> assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode()),
                 () -> assertNotNull(response.getBody()),
-                () -> assertEquals(INVALID_PAYLOAD_FORMAT,
-                        response.getBody().get("error"))
+                () -> assertEquals(INVALID_PAYLOAD_FORMAT, response.getBody().get(ERROR_KEY))
         );
     }
 
@@ -81,7 +94,7 @@ public class GlobalExceptionHandlerTest {
         assertAll(
                 () -> assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode()),
                 () -> assertNotNull(response.getBody()),
-                () -> assertEquals("SearchId cannot be null or empty", response.getBody().get("error"))
+                () -> assertEquals("SearchId cannot be null or empty", response.getBody().get(ERROR_KEY))
         );
     }
 }

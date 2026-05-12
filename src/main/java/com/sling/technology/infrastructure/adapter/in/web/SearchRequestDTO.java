@@ -8,27 +8,27 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.sling.technology.utils.Constants.*;
+import static com.sling.technology.domain.exception.DomainMessages.*;
 
 public record SearchRequestDTO(
-        @NotNull(message = DOMAIN_EXCEPTION_HOTEL_SEARCH_HOTEL_ID)
-        @NotEmpty(message = DOMAIN_EXCEPTION_HOTEL_SEARCH_HOTEL_ID)
+        @NotNull(message = HOTEL_ID_REQUIRED)
+        @NotEmpty(message = HOTEL_ID_REQUIRED)
         @Schema(description = "Hotel identifier", example = "hotel123")
         String hotelId,
 
-        @NotNull(message = DOMAIN_EXCEPTION_HOTEL_SEARCH_CHECK_IN)
+        @NotNull(message = CHECK_IN_REQUIRED)
         @JsonFormat(pattern = "dd/MM/yyyy")
-        @Schema(description = "Check-in date", example = "11/05/2026", type = "string", format = "date")
+        @Schema(description = "Check-in date", example = "15/06/2026", type = "string", format = "date")
         LocalDate checkIn,
 
-        @NotNull(message = DOMAIN_EXCEPTION_HOTEL_SEARCH_CHECK_OUT)
+        @NotNull(message = CHECK_OUT_REQUIRED)
         @JsonFormat(pattern = "dd/MM/yyyy")
-        @Schema(description = "Check-out date", example = "18/05/2026", type = "string", format = "date")
+        @Schema(description = "Check-out date", example = "22/06/2026", type = "string", format = "date")
         LocalDate checkOut,
 
-        @NotNull(message = DOMAIN_EXCEPTION_HOTEL_SEARCH_AGES)
-        @NotEmpty(message = DOMAIN_EXCEPTION_HOTEL_SEARCH_AGES)
+        @NotNull(message = AGES_REQUIRED)
+        @NotEmpty(message = AGES_REQUIRED)
         @Schema(description = "List of guest ages", example = "[24, 30, 7]")
-        List<@NotNull(message = DOMAIN_EXCEPTION_HOTEL_SEARCH_AGE_VALUE) Integer> ages
+        List<@NotNull(message = AGE_INVALID) Integer> ages
 ) {
 }

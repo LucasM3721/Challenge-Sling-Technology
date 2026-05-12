@@ -81,8 +81,8 @@ public class SearchController {
                     )
             ),
             @ApiResponse(
-                    responseCode = "400",
-                    description = "Search ID not found or invalid",
+                    responseCode = "404",
+                    description = "Search ID not found",
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = Map.class)

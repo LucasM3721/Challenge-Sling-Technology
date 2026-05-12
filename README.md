@@ -39,8 +39,8 @@ Request:
 ```json
 {
   "hotelId": "hotel123",
-  "checkIn": "11/05/2026",
-  "checkOut": "18/05/2026",
+  "checkIn": "15/06/2026",
+  "checkOut": "22/06/2026",
   "ages": [24, 30, 7]
 }
 ```
@@ -62,8 +62,8 @@ Response:
   "searchId": "550e8400-e29b-41d4-a716-446655440000",
   "search": {
     "hotelId": "hotel123",
-    "checkIn": "11/05/2026",
-    "checkOut": "18/05/2026",
+    "checkIn": "15/06/2026",
+    "checkOut": "22/06/2026",
     "ages": [24, 30, 7]
   },
   "count": 5
@@ -86,8 +86,7 @@ The project follows hexagonal architecture:
 src/main/java/com/sling/technology/
 ├── domain/           # Business logic and entities
 ├── application/      # Use cases and ports
-├── infrastructure/   # Adapters (web, persistence, messaging)
-└── utils/            # Constants
+└── infrastructure/   # Adapters (web, persistence, messaging)
 ```
 
 ## Running tests

@@ -6,12 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
-import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_TOPIC;
-
 @Configuration
 public class KafkaConfig {
 
-    @Value(HOTEL_SEARCH_KAFKA_TOPIC)
+    @Value("${app.kafka.topic.search}")
     private String topicName;
 
     @Bean

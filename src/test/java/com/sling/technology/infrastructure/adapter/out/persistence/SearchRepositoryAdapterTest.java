@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class SearchRepositoryAdapterTest {
+class SearchRepositoryAdapterTest {
 
     @Mock
     private SpringDataSearchRepository jpaRepository;
@@ -31,8 +31,8 @@ public class SearchRepositoryAdapterTest {
     @Captor
     ArgumentCaptor<SearchEntity> entityCaptor;
 
-    private final LocalDate checkIn = LocalDate.now();
-    private final LocalDate checkOut = LocalDate.now().plusDays(1);
+    private final LocalDate checkIn = LocalDate.now().plusDays(1);
+    private final LocalDate checkOut = LocalDate.now().plusDays(2);
 
     @BeforeEach
     void setUp() {

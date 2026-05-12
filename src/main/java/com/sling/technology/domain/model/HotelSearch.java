@@ -1,14 +1,12 @@
 package com.sling.technology.domain.model;
 
 import com.sling.technology.domain.exception.DomainException;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-import static com.sling.technology.utils.Constants.*;
+import static com.sling.technology.domain.exception.DomainMessages.*;
 import static java.util.UUID.randomUUID;
 
 /**
@@ -24,27 +22,30 @@ public record HotelSearch(
         )
 {
         public HotelSearch {
-                if (StringUtils.isEmpty(searchId)) {
+                if (searchId == null || searchId.isBlank()) {
                         searchId = randomUUID().toString();
                 }
-                if (StringUtils.isEmpty(hotelId)) {
-                        throw new DomainException(DOMAIN_EXCEPTION_HOTEL_SEARCH_HOTEL_ID);
+                if (hotelId == null || hotelId.isBlank()) {
+                        throw new DomainException(HOTEL_ID_REQUIRED);
                 }
                 if (Objects.isNull(checkIn)) {
-                        throw new DomainException(DOMAIN_EXCEPTION_HOTEL_SEARCH_CHECK_IN);
+                        throw new DomainException(CHECK_IN_REQUIRED);
                 }
                 if (Objects.isNull(checkOut)) {
-                        throw new DomainException(DOMAIN_EXCEPTION_HOTEL_SEARCH_CHECK_OUT);
+                        throw new DomainException(CHECK_OUT_REQUIRED);
+                }
+                if (checkIn.isBefore(LocalDate.now())) {
+                        throw new DomainException(CHECK_IN_PAST);
                 }
                 if (checkIn.isAfter(checkOut) || checkIn.isEqual(checkOut)) {
-                        throw new DomainException(DOMAIN_EXCEPTION_HOTEL_SEARCH_CHECK_IN_BEFORE_CHECK_OUT);
+                        throw new DomainException(CHECK_IN_BEFORE_CHECK_OUT);
                 }
-                if (CollectionUtils.isEmpty(ages)) {
-                        throw new DomainException(DOMAIN_EXCEPTION_HOTEL_SEARCH_AGES);
+                if (ages == null || ages.isEmpty()) {
+                        throw new DomainException(AGES_REQUIRED);
                 }
                 for (Integer age : ages) {
                         if (age == null || age < 0) {
-                                throw new DomainException(DOMAIN_EXCEPTION_HOTEL_SEARCH_AGE_VALUE);
+                                throw new DomainException(AGE_INVALID);
                         }
                 }
                 // Defensive copy to ensure immutability

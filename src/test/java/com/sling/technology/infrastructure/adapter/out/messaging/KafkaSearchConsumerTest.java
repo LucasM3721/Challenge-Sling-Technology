@@ -19,7 +19,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class KafkaSearchConsumerTest {
+class KafkaSearchConsumerTest {
 
     @Mock
     private SearchRepository searchRepository;
@@ -30,8 +30,8 @@ public class KafkaSearchConsumerTest {
     @Captor
     private ArgumentCaptor<HotelSearch> hotelSearchCaptor;
 
-    private final LocalDate checkIn = LocalDate.now();
-    private final LocalDate checkOut = LocalDate.now().plusDays(1);
+    private final LocalDate checkIn = LocalDate.now().plusDays(1);
+    private final LocalDate checkOut = LocalDate.now().plusDays(2);
 
     @Test
     void shouldSaveSearchWhenMessageConsumed() {

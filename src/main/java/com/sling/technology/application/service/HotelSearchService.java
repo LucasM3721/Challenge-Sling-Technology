@@ -3,13 +3,11 @@ package com.sling.technology.application.service;
 import com.sling.technology.application.port.in.SearchUseCase;
 import com.sling.technology.domain.model.HotelSearch;
 import com.sling.technology.domain.repository.SearchMessagePublisher;
-import org.springframework.stereotype.Service;
 
 /**
  * Use case implementation for creating hotel searches.
  * Publishes the search to Kafka for async persistence.
  */
-@Service
 public class HotelSearchService implements SearchUseCase {
     private final SearchMessagePublisher searchMessagePublisher;
 

@@ -5,9 +5,6 @@ import com.sling.technology.domain.repository.SearchRepository;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_GROUP;
-import static com.sling.technology.utils.Constants.HOTEL_SEARCH_KAFKA_TOPIC;
-
 /**
  * Kafka consumer that persists hotel searches to the database.
  * Virtual threads are enabled via application.properties for better scalability.
@@ -21,7 +18,7 @@ public class KafkaSearchConsumer {
         this.searchRepository = searchRepository;
     }
 
-    @KafkaListener(topics = HOTEL_SEARCH_KAFKA_TOPIC, groupId = HOTEL_SEARCH_KAFKA_GROUP)
+    @KafkaListener(topics = "${app.kafka.topic.search}", groupId = "${spring.kafka.consumer.group-id}")
     public void consume(HotelSearch hotelSearch) {
         searchRepository.save(hotelSearch);
     }
